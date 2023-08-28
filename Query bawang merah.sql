@@ -35,3 +35,18 @@ UNION
 SELECT TOP 5 '2022' as Year, Province,"2022" AS production FROM Pertanian..bawang_merah WHERE Province != 'INDONESIA' ORDER BY production ASC
 )
 SELECT * FROM MaxProduction 
+
+
+--see total product in every komoditi
+
+
+WITH Production AS (
+SELECT 'Bawawng Merah' AS Komoditi, SUM("2018" + "2019" + "2020" + "2021" + "2022") as Production from Pertanian..bawang_merah WHERE Province != 'INDONESIA'
+UNION 
+SELECT 'Bawawng Putih' AS Komoditi, SUM("2018" + "2019" + "2020" + "2021" + "2022") as Production from Pertanian..bawang_putih WHERE Province != 'INDONESIA'
+UNION
+SELECT 'Cabai Besar' AS Komoditi, SUM("2018" + "2019" + "2020" + "2021" + "2022") as Production from Pertanian..cabai_besar  WHERE Province != 'INDONESIA'
+UNION 
+SELECT 'Cabai Rawit' AS Komoditi, SUM("2018" + "2019" + "2020" + "2021" + "2022") as Production from Pertanian..cabai_rawit  WHERE Province != 'INDONESIA' 
+)
+SELECT * FROM Production ORDER BY Production DESC
